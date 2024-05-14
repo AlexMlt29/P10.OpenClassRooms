@@ -58,7 +58,7 @@ const Select = ({
             e.preventDefault();
             setCollapsed(!collapsed);
           }}
-          aria-label={collapsed ? "Expand Selection" : "Collapse Selection"} // Add this line
+          aria-label={collapsed ? "Expand Selection" : "Collapse Selection"}
         >
           <Arrow />
         </button>
