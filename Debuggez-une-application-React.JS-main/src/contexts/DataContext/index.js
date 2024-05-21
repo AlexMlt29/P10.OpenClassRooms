@@ -22,12 +22,16 @@ export const DataProvider = ({ children }) => {
   const [data, setData] = useState(null);
   const [last, setLast] = useState(null);
 
+  const sortEventsByDate = (events) => 
+    events.sort((a, b) => new Date(b.date) - new Date(a.date));
+
   const getData = useCallback(async () => {
     try {
       const fetchedData = await api.loadData();
-      setData(fetchedData);
       if (fetchedData && fetchedData.events) {
-        setLast(fetchedData.events[fetchedData.events.length - 1]);
+        const sortedEvents = sortEventsByDate(fetchedData.events);
+        setData({ ...fetchedData, events: sortedEvents });
+        setLast(sortedEvents[0]);
       }
     } catch (err) {
       setError(err);
