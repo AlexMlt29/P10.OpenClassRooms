@@ -1,3 +1,4 @@
+/* eslint-disable react/require-default-props */
 import PropTypes from "prop-types";
 
 import "./style.scss";
@@ -20,9 +21,5 @@ PeopleCard.propTypes = {
   name: PropTypes.string.isRequired,
   position: PropTypes.string.isRequired,
 };
-
-PeopleCard.defaultProps = {
-  imageAlt: "image",
-}
 
 export default PeopleCard;

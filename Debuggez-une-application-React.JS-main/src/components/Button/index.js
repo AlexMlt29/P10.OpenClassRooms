@@ -1,3 +1,4 @@
+/* eslint-disable react/require-default-props */
 import PropTypes from "prop-types";
 
 import "./style.scss";
@@ -58,12 +59,5 @@ Button.propTypes = {
   disabled: PropTypes.bool,
   children: PropTypes.node,
 };
-Button.defaultProps = {
-  disabled: false,
-  onClick: () => null,
-  type: BUTTON_TYPES.DEFAULT,
-  title: "",
-  children: null
-}
 
 export default Button;

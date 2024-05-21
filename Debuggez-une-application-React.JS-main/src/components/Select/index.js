@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable react/require-default-props */
 import { useState } from "react";
 import PropTypes from "prop-types";
 
@@ -7,19 +8,21 @@ import "./style.scss";
 
 const Select = ({
   selection,
-  onChange,
+  onChange = () => {},
   name,
-  titleEmpty,
+  titleEmpty = false,
   label,
   type = "normal",
 }) => {
   const [value, setValue] = useState(null);
   const [collapsed, setCollapsed] = useState(true);
+  
   const changeValue = (newValue) => {
     onChange(newValue);
     setValue(newValue);
     setCollapsed(true);
   };
+  
   return (
     <div className={`SelectContainer ${type}`} data-testid="select-testid">
       {label && <div className="label">{label}</div>}
@@ -36,15 +39,17 @@ const Select = ({
                   Toutes
                 </li>
               )}
-              {selection.map((s) => (
-                <li key={s} onClick={() => changeValue(s)}>
-                  <input
-                    defaultChecked={value === s}
-                    name="selected"
-                    type="radio"
-                  />{" "}
-                  {s}
-                </li>
+              {selection
+                .filter((s) => s) // Filtrer les valeurs indéfinies ou nulles
+                .map((s) => (
+                  <li key={s} onClick={() => changeValue(s)}>
+                    <input
+                      defaultChecked={value === s}
+                      name="selected"
+                      type="radio"
+                    />{" "}
+                    {s}
+                  </li>
               ))}
             </>
           )}
@@ -89,14 +94,6 @@ Select.propTypes = {
   titleEmpty: PropTypes.bool,
   label: PropTypes.string,
   type: PropTypes.string,
-}
-
-Select.defaultProps = {
-  onChange: () => null,
-  titleEmpty: false,
-  label: "",
-  type: "normal",
-  name: "select",
 }
 
 export default Select;
