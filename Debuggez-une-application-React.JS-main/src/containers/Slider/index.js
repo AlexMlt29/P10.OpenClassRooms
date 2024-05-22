@@ -7,14 +7,14 @@ import "./style.scss";
 const Slider = () => {
   const { data } = useData();
   const [index, setIndex] = useState(0);
-  const byDateDesc = data?.focus?.length
-    ? [...data.focus].sort((evtA, evtB) =>
-        new Date(evtA.date) > new Date(evtB.date) ? -1 : 1
-      )
-    : [];
+  const byDateDesc = data?.focus?.length  // Vérifie si data et data.focus existent et ont une longueur non nulle
+  ? [...data.focus]                     // Clone le tableau data.focus
+      .sort((evtA, evtB) =>             // Trie les événements par date décroissante
+        new Date(evtB.date) - new Date(evtA.date))  
+  : [];                                 // Si data.focus est vide ou n'existe pas, retourne un tableau vide
   const nextCard = () => {
     setTimeout(
-      () => setIndex(index < byDateDesc.length - 1 ? index + 1 : 0),
+      () => setIndex(index < byDateDesc.length -1 ? index + 1 : 0),
       5000
     );
   };
