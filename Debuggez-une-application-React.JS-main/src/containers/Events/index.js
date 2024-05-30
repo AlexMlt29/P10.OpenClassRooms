@@ -20,7 +20,7 @@ const EventList = () => {
     if (!type) {
       return true;
     }
-    // Sinon, on inclut seulement les événements dont le type correspond au type spécifié
+    // Sinon, ça inclut seulement les événements dont le type correspond au type spécifié
     return event.type === type;
   });
 
