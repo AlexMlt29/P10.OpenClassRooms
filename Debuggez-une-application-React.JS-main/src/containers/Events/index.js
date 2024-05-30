@@ -14,15 +14,21 @@ const EventList = () => {
   const [type, setType] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
 
+  // ça filtre les événements en fonction du type spécifié
   const filteredEvents = (data?.events || []).filter((event) => {
+    // Si le type n'est pas défini, on inclut tous les événements
     if (!type) {
       return true;
     }
+    // Sinon, on inclut seulement les événements dont le type correspond au type spécifié
     return event.type === type;
   });
 
+  // ça pagine les événements filtrés pour obtenir seulement ceux de la page actuelle
   const paginatedEvents = filteredEvents.slice(
+    // Calcul de l'index de début pour la page actuelle
     (currentPage - 1) * PER_PAGE,
+    // Calcul de l'index de fin pour la page actuelle
     currentPage * PER_PAGE
   );
 
